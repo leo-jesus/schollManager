@@ -1,0 +1,52 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<form class="card" method="POST" action="/teacher">
+
+    <section class="avatar"></section>
+    <section class="details">
+        <h3>New Teacher</h3>
+        <div class="item">
+            <div>URL Avatar</div>
+            <div><input type="url" name="avatar_url" placeholder="https://"></div>
+        </div>
+
+        <div class="item">
+            <div>Instructor</div>
+            <div><input type="text" name="name" placeholder="Name of Instructor"></div>
+        </div>
+
+        <div class="item">
+            <div>Birth date</div>
+            <div><input type="date" name="birth"></div>
+        </div>
+
+        <div class="item">
+            <div>Graduation Level</div>
+            <div><select name="scholarity">
+                    <option value="" selected="selected"> select your graduation</option>
+                    <option value="highscholl">Highscholl degree</option>
+                    <option value="graduation">Graduation degree</option>
+                    <option value="master">Master degree</option>
+                    <option value="phd">Doctorate degree</option>
+                </select></div>
+        </div>
+
+        <div class="item">
+            <div>Type of Class</div>
+            <span><input type="radio" name="classType" value="remote" checked>remote class</span>
+            <span><input type="radio" name="classType" value="presential">presential class</span>
+        </div>
+
+        <div class="item">
+            <div>Atuation area</div>
+            <div><input type="text" name="atuationArea" placeholder="Divide your atuation by commas"></div>
+        </div>
+
+
+        <button type="submit">Save</button>
+    </section>
+
+</form>
+
+{% endblock content %}
