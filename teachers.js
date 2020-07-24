@@ -1,5 +1,27 @@
 const fs = require('fs')
 const data = require('./data.json')
+const { age, date } = require('./utils')
+const Intl = require('intl')
+
+exports.show = (req, res) => {
+    const { id } = req.params
+
+    const foundTeacher = data.teachers.find((teachers) => {
+        return teachers.id == id
+
+    })
+    if (!foundTeacher)
+        return res.send('Teacher not found')
+
+
+    const teacher = {
+        ...foundTeacher,
+        age: age(foundTeacher.birth),
+        atuationArea: foundTeacher.atuationArea.split(','),
+        created_at: new Intl.DateTimeFormat('pt-BR').format(foundTeacher.created_at)
+    }
+    return res.render('teachers/show', { teacher })
+}
 
 exports.post = (req, res) => {
     const keys = Object.keys(req.body)
@@ -32,4 +54,23 @@ exports.post = (req, res) => {
         return res.render('teachers/teacher')
     })
     //return res.redirect('/teacher')
+}
+
+exports.edit = (req, res)=>{
+    const {id} = req.params
+
+    const foundTeacher = data.teachers.find((teachers)=>{
+        return teachers.id == id
+    })
+
+    if(!foundTeacher)
+    return res.send("instructor not found")
+    
+    const teacher = {
+        ...foundTeacher, 
+        birth: date(foundTeacher.birth)
+    }
+    
+    return res.render('teachers/edit', {teacher})
+    
 }
