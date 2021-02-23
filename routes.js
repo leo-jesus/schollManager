@@ -4,7 +4,7 @@ const routes = express.Router()
 const teachers = require('./teachers')
 
 routes.get('/', (req, res) => {
-    return res.render('teacher')
+    return res.render('teachers')
 })
 
 routes.get('/teachers', (req, res) => {
@@ -19,6 +19,14 @@ routes.get('/teachers/:id', teachers.show)
 
 routes.get('/teachers/:id/edit', teachers.edit)
 
-routes.post("/teacher", teachers.post)
+routes.post("/teachers", teachers.post)
+
+routes.put("/teachers", teachers.put)
+
+routes.delete("/teachers", teachers.delete)
+
+routes.get('/students', (req, res)=>{
+    return res.send("students")
+})
 
 module.exports = routes

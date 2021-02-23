@@ -56,21 +56,64 @@ exports.post = (req, res) => {
     //return res.redirect('/teacher')
 }
 
-exports.edit = (req, res)=>{
-    const {id} = req.params
+exports.edit = (req, res) => {
+    const { id } = req.params
 
-    const foundTeacher = data.teachers.find((teachers)=>{
+    const foundTeacher = data.teachers.find((teachers) => {
         return teachers.id == id
     })
 
-    if(!foundTeacher)
-    return res.send("instructor not found")
-    
+    if (!foundTeacher)
+        return res.send("instructor not found")
+
     const teacher = {
-        ...foundTeacher, 
+        ...foundTeacher,
         birth: date(foundTeacher.birth)
     }
-    
-    return res.render('teachers/edit', {teacher})
-    
+
+    return res.render('teachers/edit', { teacher })
+
+}
+
+exports.put = (req, res) => {
+    const { id } = req.body
+    let index = 0
+
+    const foundTeacher = data.teachers.find((teacher, foundIndex) => {
+        if (id == teacher.id) {
+            index = foundIndex
+            return true
+        }
+    })
+
+    if (!foundTeacher)
+        return res.send("teacher not found")
+
+    const teacher = {
+        ...foundTeacher,
+        ...req.body,
+        birth: Date.parse(req.body.birth)
+    }
+    data.teachers[index] = teacher
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
+        if (err) return res.send("write error!")
+
+        return res.redirect(`/teachers/${id}`)
+    })
+
+}
+
+exports.delete = (req, res)=>{
+    const{id} = req.body
+
+    const filteredTeachers = data.teachers.filter((teacher)=>{
+        return teacher.id != id
+    })
+
+    data.teachers= filteredTeachers
+
+    fs.writeFile("data.json", JSON.stringify(data, null,2), (err)=>{
+        if(err) return res.send("write file error")
+        return res.redirect("/teachers")
+    })
 }
