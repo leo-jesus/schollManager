@@ -3,6 +3,10 @@ const data = require('./data.json')
 const { age, date } = require('./utils')
 const Intl = require('intl')
 
+exports.teacher = (req, res) => {
+    return res.render('teachers/teacher', { teachers: data.teachers })
+}
+
 exports.show = (req, res) => {
     const { id } = req.params
 
@@ -92,7 +96,8 @@ exports.put = (req, res) => {
     const teacher = {
         ...foundTeacher,
         ...req.body,
-        birth: Date.parse(req.body.birth)
+        birth: Date.parse(req.body.birth),
+        id: Number(req.body.id)
     }
     data.teachers[index] = teacher
     fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
@@ -103,17 +108,17 @@ exports.put = (req, res) => {
 
 }
 
-exports.delete = (req, res)=>{
-    const{id} = req.body
+exports.delete = (req, res) => {
+    const { id } = req.body
 
-    const filteredTeachers = data.teachers.filter((teacher)=>{
+    const filteredTeachers = data.teachers.filter((teacher) => {
         return teacher.id != id
     })
 
-    data.teachers= filteredTeachers
+    data.teachers = filteredTeachers
 
-    fs.writeFile("data.json", JSON.stringify(data, null,2), (err)=>{
-        if(err) return res.send("write file error")
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
+        if (err) return res.send("write file error")
         return res.redirect("/teachers")
     })
 }

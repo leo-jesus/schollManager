@@ -64,9 +64,9 @@ header {
 
 .avatar {
     background         : url(https://source.unsplash.com//collection/1287676/400x400);
-    background-repeat  : no-repeat;
-    background-size    : cover;
-    background-position: center center;
+    background-repeat  : no-repeat !important;
+    background-size    : cover !important;
+    background-position: center center !important;
 }
 
 .card {
@@ -130,7 +130,8 @@ header {
     color         : var(--primary-color);
 }
 
-.details .item span {
+.details .item span,
+tbody tr td div span {
     background-color: #f7de1e;
     border-radius   : 15px;
     padding         : 4px 12px;
@@ -168,18 +169,83 @@ a.button {
     width           : 100%;
     font-weight     : bold;
     outline         : none;
-    color: white;
-    cursor: pointer;
+    color           : white;
+    cursor          : pointer;
 }
 
-a.button{
-    display: block;
-    box-sizing: border-box;
-    text-align: center;
+a.button {
+    display        : block;
+    box-sizing     : border-box;
+    text-align     : center;
     text-decoration: none;
 }
 
-#form-delete button[type="submit"]{
-    margin-top: 8px;
+#form-delete button[type="submit"] {
+    margin-top      : 8px;
     background-color: lightcoral;
+}
+
+
+/* TEACHER'S INDEX PAGE */
+.table-container {
+    display   : block;
+    padding   : 40px;
+    box-sizing: border-box;
+}
+
+.table-container table {
+    border-spacing: 0;
+
+}
+
+.table-container thead tr th {
+    text-align: left;
+}
+
+td,
+th {
+    padding      : 16px;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+th {
+    text-transform: uppercase;
+    color         : #888;
+    font-size     : 16px;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+tbody tr td:first-child {
+    display              : grid;
+    grid-template-columns: 60px 1fr;
+    align-items          : center;
+}
+
+tbody tr td:first-child span {
+    width              : 40px;
+    height             : 40px;
+    background-position: center;
+    background-size    : cover;
+    border-radius      : 50%;
+    box-shadow         : 3px 1px 6px -4px black;
+    border             : 2px solid white;
+}
+
+tbody tr td:last-child a {
+    background-color: var(--primary-color);
+    padding         : 8px 16px;
+    text-decoration : none;
+    text-transform  : uppercase;
+    color           : white;
+    font-size       : 12px;
+    border-radius   : 8px;
+}
+
+.table-container thead tr th:last-child,
+td:last-child {
+    text-align: center;
 }

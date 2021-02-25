@@ -1,9 +1,8 @@
 {% extends "layout.njk" %}
 
 {% block content %}
-    <div class="card">
-
-        <section class="avatar"></section>
+    <div class="card table-container">
+        {# <section class="avatar"></section>
         <section class="details">
             <h3>Teachears</h3>
             <div class="item">
@@ -37,8 +36,40 @@
                 <div>01/01/2019</div>
             </div>
 
-        </section>
+        </section> #}
 
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>Teacher</th>
+                    <th>Attendance</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for teacher in teachers %}
+                    <tr>
+                        <td>
+                            <span style="background-image: url({{teacher.avatar_url}})"></span>
+                            {{teacher.name}}</td>
+                        <td>
+                            <div>
+                                {%set attendance = teacher.atuationArea.split(',')%}
+                                {% for a in attendance %}
+                                    <span>
+                                        {{a}}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        </td>
+                        <td>
+                            <a href="/teachers/{{teacher.id}}">View</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
 {% endblock content %}
