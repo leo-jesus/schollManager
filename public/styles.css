@@ -41,6 +41,11 @@ header {
     position       : relative;
 }
 
+.links a.active{
+    color: var(--primary-color);
+    font-weight: bolder;
+}
+
 .links a:hover {
     color: var(--primary-color);
 }
@@ -59,6 +64,7 @@ header {
     width     : 100%;
     transition: width 0.7s ease-in-out;
 }
+
 
 /* =====CARD===== */
 
@@ -235,7 +241,8 @@ tbody tr td:first-child span {
     border             : 2px solid white;
 }
 
-tbody tr td:last-child a {
+tbody tr td:last-child a, 
+.table-container > a {
     background-color: var(--primary-color);
     padding         : 8px 16px;
     text-decoration : none;
@@ -243,6 +250,11 @@ tbody tr td:last-child a {
     color           : white;
     font-size       : 12px;
     border-radius   : 8px;
+}
+
+.table-container > a{
+    margin-bottom: 16px;
+    display: inline-block;
 }
 
 .table-container thead tr th:last-child,
