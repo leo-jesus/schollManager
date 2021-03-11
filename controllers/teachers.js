@@ -7,6 +7,10 @@ exports.teacher = (req, res) => {
     return res.render('teachers/teacher', { teachers: data.teachers })
 }
 
+exports.create = (req, res) => {
+    return res.render('teachers/create')
+}
+
 exports.show = (req, res) => {
     const { id } = req.params
 
@@ -35,6 +39,7 @@ exports.post = (req, res) => {
         }
     }
     let { avatar_url, name, birth, scholarity, classType, atuationArea } = req.body
+
     birth = Date.parse(birth)
     const created_at = Date.now()
     const id = Number(data.teachers.length + 1)
@@ -55,9 +60,9 @@ exports.post = (req, res) => {
             return res.send("write file error")
         }
 
-        return res.render('teachers/teacher')
+        // return res.render('teachers/teacher')
+        return res.redirect('/teachers')
     })
-    //return res.redirect('/teacher')
 }
 
 exports.edit = (req, res) => {

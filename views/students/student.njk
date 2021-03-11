@@ -7,12 +7,13 @@
             <thead>
                 <tr>
                     <th>Student</th>
-                    <th>Attendance</th>
+                    <th>Email</th>
+                    <th>School Year</th>
                     <th>Action</th>
 
                 </tr>
             </thead>
-            <a href="/teachers/create">New</a>
+            <a href="/students/create">New</a>
 
             <tbody>
                 {% for student in students %}
@@ -20,16 +21,13 @@
                         <td>
                             <span style="background-image: url({{student.avatar_url}})"></span>
                             {{student.name}}</td>
-                        <td>
-                            <div>
-                                {%set attendance = student.atuationArea.split(',')%}
-                                {% for a in attendance %}
-                                    <span>
-                                        {{a}}
-                                    </span>
-                                {% endfor %}
-                            </div>
-                        </td>
+                       <td>
+                            {{student.email}}    
+                       </td>
+                       <td>
+                           {{student.scholarYear}}
+                       </td>
+                       
                         <td>
                             <a href="/students/{{student.id}}">View</a>
                         </td>

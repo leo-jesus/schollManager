@@ -12,32 +12,30 @@
             </div>
 
             <div class="item">
-                <div>Idade</div>
+                <div>Age</div>
                 <div>{{student.age}}</div>
             </div>
 
             <div class="item">
-                <div>Grau de Escolaridade</div>
+                <div>BirthDay</div>
                 <div>
-                    {{student.atuationArea}}
+                    {{student.birthday}}
                 </div>
             </div>
 
             <div class="item">
-                <div>Tipo de Aula</div>
-                <div>{{student.classType}}</div>
+                <div>School Year</div>
+                <div>{{student.scholarYear}}</div>
             </div>
 
             <div class="item">
-                <div>Matérias</div>
-                {% for area in student.atuationArea %}
-                    <span>{{area}}</span>
-                {% endfor %}
+                <div>Email</div>
+                <div>{{student.email}} </div>
             </div>
 
             <div class="item">
-                <div>Desde</div>
-                <div>{{student.created_at}}</div>
+                <div>Workload</div>
+                <div>{{student.workload}}</div>
             </div>
             <a href="/students/{{student.id}}/edit" class="button">Editar</a>
         </section>

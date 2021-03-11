@@ -7,6 +7,10 @@ exports.student = (req, res) => {
     return res.render('students/student', { students: data.students })
 }
 
+exports.create =  (req, res) => {
+    return res.render('students/create')
+}
+
 exports.show = (req, res) => {
     const { id } = req.params
 
@@ -21,7 +25,7 @@ exports.show = (req, res) => {
     const student = {
         ...foundStudent,
         age: age(foundStudent.birth),
-        atuationArea: foundStudent.atuationArea.split(','),
+        // atuationArea: foundStudent.atuationArea.split(','),
         created_at: new Intl.DateTimeFormat('pt-BR').format(foundStudent.created_at)
     }
     return res.render('students/show', { student })
@@ -34,20 +38,19 @@ exports.post = (req, res) => {
             return res.send("please, fulfill all fields")
         }
     }
-    let { avatar_url, name, birth, scholarity, classType, atuationArea } = req.body
-    birth = Date.parse(birth)
-    const created_at = Date.now()
-    const id = Number(data.students.length + 1)
+
+    birth = Date.parse(req.body.birth)
+
+    let id = 1
+    const lastStudent = data.students[data.students.id - 1]
+    if (lastStudent) {
+        id = lastStudent.id + 1
+    }
 
     data.students.push({
         id,
-        avatar_url,
-        name,
         birth,
-        scholarity,
-        classType,
-        atuationArea,
-        created_at
+        ...req.body
     })
 
     fs.writeFile('data.json', JSON.stringify(data, null, 2), (err) => {
@@ -55,9 +58,9 @@ exports.post = (req, res) => {
             return res.send("write file error")
         }
 
-        return res.render('students/student')
+        // return res.render('students/student')
+        return res.redirect('/students')
     })
-    //return res.redirect('/student')
 }
 
 exports.edit = (req, res) => {

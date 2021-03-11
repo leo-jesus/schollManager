@@ -1,5 +1,4 @@
 {
-
   "teachers": [
     {
       "id": 1,
@@ -12,7 +11,7 @@
       "created_at": 1594949689226
     },
     {
-      "id": 3,
+      "id": 2,
       "avatar_url": "https://images.unsplash.com/photo-1544717305-2782549b5136?ixid=MXwxMjA3fDB8MHxzZWFyY2h8N3x8dGVhY2hlcnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       "name": "Tatiana Cristina Franco",
       "birth": 457228800000,
@@ -21,8 +20,15 @@
       "atuationArea": "Art, Law",
       "created_at": 1595555580444
     }
-  ], 
-  "students":{
-    
-  }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "birth": 1537920000000,
+      "avatar_url": "https://images.unsplash.com/photo-1599687351724-dfa3c4ff81b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+      "name": "Leonardo B de Jesus",
+      "scholaryear": "5-ES",
+      "email": "taicfranco@hotmail.com"
+    }
+  ]
 }
