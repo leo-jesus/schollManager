@@ -1,13 +1,13 @@
 const fs = require('fs')
 const data = require('../data.json')
-const { age, date } = require('../utils')
+const { age, date, scholarYear, sYear } = require('../utils')
 const Intl = require('intl')
 
 exports.student = (req, res) => {
     return res.render('students/student', { students: data.students })
 }
 
-exports.create =  (req, res) => {
+exports.create = (req, res) => {
     return res.render('students/create')
 }
 
@@ -25,8 +25,8 @@ exports.show = (req, res) => {
     const student = {
         ...foundStudent,
         age: age(foundStudent.birth),
-        // atuationArea: foundStudent.atuationArea.split(','),
-        created_at: new Intl.DateTimeFormat('pt-BR').format(foundStudent.created_at)
+        birthday: date(foundStudent.birth).birthDay,
+        scholarYear:sYear(foundStudent.scholarYear)
     }
     return res.render('students/show', { student })
 }
@@ -42,15 +42,15 @@ exports.post = (req, res) => {
     birth = Date.parse(req.body.birth)
 
     let id = 1
-    const lastStudent = data.students[data.students.id - 1]
+    const lastStudent = data.students[data.students.length - 1]
     if (lastStudent) {
         id = lastStudent.id + 1
     }
 
     data.students.push({
         id,
-        birth,
-        ...req.body
+        ...req.body,
+        birth
     })
 
     fs.writeFile('data.json', JSON.stringify(data, null, 2), (err) => {
@@ -75,7 +75,7 @@ exports.edit = (req, res) => {
 
     const student = {
         ...foundStudent,
-        birth: date(foundStudent.birth)
+        birth: date(foundStudent.birth).iso
     }
 
     return res.render('students/edit', { student })
